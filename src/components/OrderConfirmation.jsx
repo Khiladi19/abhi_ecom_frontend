@@ -5,7 +5,7 @@ import ShowOrderProduct from "./ShowOrderProduct";
 function OrderConfirmation() {
   const { userOrder } = useContext(AppContext);
   const [latestOrder, setLatestOrder] = useState({});
-  console.log("userOrder", userOrder);
+  // console.log("userOrder", userOrder);
 
   useEffect(() => {
     if (userOrder) {
@@ -13,7 +13,7 @@ function OrderConfirmation() {
     }
   }, [userOrder]);
 
-  console.log("Latest Order", latestOrder);
+  // console.log("Latest Order", latestOrder);
 
   return (
     <>

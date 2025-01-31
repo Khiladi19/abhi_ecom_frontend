@@ -161,7 +161,7 @@ function AppState(props) {
         withCredentials: true,
       }
     );
-    console.log("addToCard", api.data.cart.items);
+    // console.log("addToCard", api.data.cart.items);
     setReload(!reload);
     toast.success(api.data.message, {
       position: "top-right",
