@@ -121,7 +121,7 @@ function Navbar() {
             <div className="items" onClick={() => filterByCatagorey("laptops")}>
               Laptops
             </div>
-            <div className="items" onClick={() => filterByCatagorey("shirt,jeans")}>
+            <div className="items" onClick={() => filterByCatagorey("shirt")}>
               Men's
             </div>
             <div
