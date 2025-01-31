@@ -7,7 +7,6 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 function AppState(props) {
   // const url = "http://localhost:2000/api";
 
-
   const url = "https://abhi-ecom.onrender.com/api";
 
   const [products, setProducts] = useState([]);
@@ -53,7 +52,7 @@ function AppState(props) {
   const register = async (name, email, password) => {
     try {
       const api = await axios.post(
-        "http://localhost:2000/api/user/register",
+         `${url}/user/register`,
         { name, email, password },
         {
           headers: {
