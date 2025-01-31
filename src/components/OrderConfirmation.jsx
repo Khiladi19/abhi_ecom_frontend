@@ -78,7 +78,7 @@ function OrderConfirmation() {
                       <li>OrderId :- {latestOrder?.orderId}</li>
                       <li>PaymentId :- {latestOrder?.paymentId}</li>
                       <li>PayStatus :- {latestOrder?.payStatus}</li>
-                      <li>Amount :- {latestOrder?.amount}</li>
+                      <li>Amount :- {latestOrder?.amount} {'₹'}</li>
                       <li>OrderDate :- {latestOrder?.orderDate}</li>
                       <li>Name :- {latestOrder?.userShipping?.fullName}</li>
                       <li>

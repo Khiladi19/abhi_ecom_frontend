@@ -70,7 +70,7 @@ function Checkout() {
           }
           
       },
-        callback_url: "http://localhost:3000/payment-success", // Your success URL
+        callback_url: `${url}/payment-success`, // Your success URL
         prefill: userShipping,
         theme: {
           color: "#F37254",
