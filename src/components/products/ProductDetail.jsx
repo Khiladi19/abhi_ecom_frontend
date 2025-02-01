@@ -5,11 +5,10 @@ import RelatedProduct from "./RelatedProduct";
 import AppContext from "../../context/AppContext";
 import { Link } from "react-router-dom";
 function ProductDetail() {
-  const {removeCart, addToCart } = useContext(AppContext)
+  const {removeCart, addToCart ,url} = useContext(AppContext)
   const [product, setProduct] = useState([]);
   console.log("product",product)
   const { id } = useParams();
-  const url = "http://localhost:2000/api";
 
   useEffect(() => {
     const fetechProduct = async () => {
@@ -20,7 +19,7 @@ function ProductDetail() {
         withCredentials: true,
       });
 
-      console.log("Api", api.data);
+      // console.log("Api", api.data);
       setProduct(api.data.product);
     };
 
