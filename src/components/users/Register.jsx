@@ -60,7 +60,7 @@ function Register() {
         className="container my-5"
         style={{
           width: "500px",
-          height: "400px",
+          height: "430px",
           border: "2px solid blue",
           borderRadius: "10px",
           marginTop: "20px",
