@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+
 function RelatedProduct({ catagory }) {
   const { products } = useContext(AppContext);
   const [relatedProduct, setRelProduct] = useState([]);
