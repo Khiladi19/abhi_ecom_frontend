@@ -33,6 +33,8 @@ function AppState(props) {
       setFilterData(api.data.products);
       profile();
     };
+    
+    // These functions are executed after fetching products:
     fetechProduct();
     userCart();
     getAddress();
