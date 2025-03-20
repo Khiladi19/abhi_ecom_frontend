@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AppContext from "../../context/AppContext";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const { register } = useContext(AppContext);
@@ -12,26 +12,27 @@ function Register() {
     password: "",
   });
 
-  const [error,setError] = useState("")
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const onChangerHandler = (e) => {
+  const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setError("") // clear error when user trying to typing
+    setError(""); // Clear error when user starts typing
   };
 
   const { name, email, password } = formData;
-  
+
   // Function to validate email format
   const isValidEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  const sumbitHandler = async (e) =>{
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-     // Form validation
-     if (!name || !email || !password) {
+    // Form validation
+    if (!name || !email || !password) {
       setError("All fields are required.");
       return;
     }
@@ -40,6 +41,13 @@ function Register() {
       setError("Please enter a valid email address.");
       return;
     }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+
+    setLoading(true); // Show loading spinner
 
     try {
       const result = await register(name, email, password);
@@ -51,8 +59,10 @@ function Register() {
     } catch (error) {
       setError("An error occurred. Please try again later.");
       console.error("Registration error:", error);
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
-  }
+  };
 
   return (
     <>
@@ -60,59 +70,60 @@ function Register() {
         className="container my-5"
         style={{
           width: "500px",
-          height: "430px",
+          height: "480px",
           border: "2px solid blue",
           borderRadius: "10px",
-          marginTop: "20px",
+          padding: "20px",
         }}
       >
         <h2 className="text-center my-3">User Register</h2>
+
         {error && <p className="text-danger text-center">{error}</p>}
-        <form onSubmit={sumbitHandler}>
+
+        <form onSubmit={submitHandler}>
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Name
-            </label>
+            <label className="form-label">Name</label>
             <input
               name="name"
               value={formData.name}
-              onChange={onChangerHandler}
+              onChange={onChangeHandler}
               type="text"
               className="form-control"
-              id="exampleInputName"
-              aria-describedby="nameHelp"
+              placeholder="Enter your name"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
+            <label className="form-label">Email address</label>
             <input
               type="email"
               name="email"
               value={formData.email}
-              onChange={onChangerHandler}
+              onChange={onChangeHandler}
               className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              placeholder="Enter your email"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
+            <label className="form-label">Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
-              onChange={onChangerHandler}
+              onChange={onChangeHandler}
               className="form-control"
-              id="exampleInputPassword1"
+              placeholder="Enter your password"
             />
           </div>
           <div className="d-grid col-6 my-3 mx-auto">
-            <button type="submit" className="btn btn-primary">
-              Register
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? (
+                <span>
+                  <span className="spinner-border spinner-border-sm" role="status"></span>
+                  &nbsp; Registering...
+                </span>
+              ) : (
+                "Register"
+              )}
             </button>
           </div>
         </form>
@@ -122,3 +133,4 @@ function Register() {
 }
 
 export default Register;
+
