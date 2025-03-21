@@ -25,9 +25,9 @@ function ShowProduct() {
                   className="card-img-top rounded"
                   alt={product.title}
                   style={{
-                    width: "100%",
+                    width: "200px",
                     height: "200px",
-                    objectFit: "cover",
+                    borderRadius: "10px",
                     border: "2px solid yellow",
                   }}
                 />
