@@ -10,7 +10,7 @@ function ShowProduct() {
     <>
       <div className="row d-flex justify-content-center align-items-center">
         {loading ? (
-          <div className="text-center">
+          <div className="text-center" style={{marginTop:"10px"}}>
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
