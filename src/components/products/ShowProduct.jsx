@@ -7,8 +7,8 @@ function ShowProduct() {
 
 
   return (
-    <div className="container my-5">
-      <div className="row justify-content-center">
+    <>
+      <div className="row d-flex justify-content-center align-items-center">
         {loading ? (
           <div className="text-center">
             <div className="spinner-border text-primary" role="status">
@@ -57,7 +57,7 @@ function ShowProduct() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 
