@@ -1,10 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
-import {Link} from "react-router-dom" 
+import {Link,useNavigate} from "react-router-dom" 
+
 function ShowProduct() {
   const { products,filterData,addToCart,loading} = useContext(AppContext);
-
+  const navigate = useNavigate();
 
   return (
     <>
@@ -45,7 +46,7 @@ function ShowProduct() {
                     <button className="btn btn-primary mx-3">
                       {product.price} {"₹"}
                     </button>
-                    <button className="btn btn-warning " onClick={()=>addToCart(product._id, product.title, product.price,1, product.imgSrc)}>AddToCart</button>
+                    <button className="btn btn-warning " onClick={()=>addToCart(product._id, product.title, product.price,1, product.imgSrc,navigate)}>AddToCart</button>
                   </div>
                 </div>
               </div>

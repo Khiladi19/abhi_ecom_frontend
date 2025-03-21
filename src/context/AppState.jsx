@@ -159,33 +159,54 @@ function AppState(props) {
   };
 
   // add to cart
-  const addToCart = async (productId, title, price, qty, imgSrc) => {
-    const token = localStorage.getItem("token");
-    const api = await axios.post(
-      `${url}/cart/add`,
-      { productId, title, price, qty, imgSrc },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Auth: token,
-        },
-        withCredentials: true,
-      }
-    );
-    // console.log("addToCard", api.data.cart.items);
-    setReload(!reload);
-    toast.success(api.data.message, {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
+  const addToCart = async (productId, title, price, qty, imgSrc, navigate) => {
+    if (!isAuthenticated) {
+      toast.warning("You need to log in first!", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+  
+      navigate("/login"); // Redirect to login page
+      return;
+    }
+  
+    try {
+      const token = localStorage.getItem("token");
+      const api = await axios.post(
+        `${url}/cart/add`,
+        { productId, title, price, qty, imgSrc },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Auth: token,
+          },
+          withCredentials: true,
+        }
+      );
+      setReload(!reload);
+      toast.success(api.data.message, {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
+  
   // user cart
   // const userCart = async () => {
   //   const token = localStorage.getItem("token");
