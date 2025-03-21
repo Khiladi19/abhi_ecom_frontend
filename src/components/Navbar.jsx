@@ -110,6 +110,8 @@ function Navbar() {
           </div>
         </div>
 
+
+        
         {location.pathname == "/" && (
           <div className="sub_bar ">
             <div className="items" onClick={() => setFilterData(products)}>
