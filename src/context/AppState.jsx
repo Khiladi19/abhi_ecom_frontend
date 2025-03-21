@@ -18,28 +18,37 @@ function AppState(props) {
   const [reload, setReload] = useState(false);
   const [userAddress,setUserAddress] = useState("")
   const [userOrder,setUserOrder] = useState([])
-
+  const [loading,setLoading] = useState(true)
+ 
   // Browser rendering
   useEffect(() => {
-    // fetch product
-    const fetechProduct = async () => {
-      const api = await axios.get(`${url}/product/all`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-      setProducts(api.data.products);
-      setFilterData(api.data.products);
-      profile();
+    const fetchProduct = async () => {
+      try {
+        setLoading(true); // Start loading
+
+        const api = await axios.get(`${url}/product/all`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+
+        setProducts(api.data.products);
+        setFilterData(api.data.products);
+
+        // Execute additional functions after fetching products
+        await profile();
+        await userCart();
+        await getAddress();
+        await user_Order();
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); //  Stop loading after fetch completes (whether success or error)
+      }
     };
-    
-    // These functions are executed after fetching products:
-    fetechProduct();
-    userCart();
-    getAddress();
-    user_Order();
+
+    fetchProduct();
   }, [token, reload]);
+
 
   // token set in local storage
   useEffect(() => {
@@ -420,6 +429,7 @@ function AppState(props) {
     <AppContext.Provider
       value={{
         products,
+        loading,
         register,
         login,
         url,
