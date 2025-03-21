@@ -6,14 +6,16 @@ import { Link, useParams } from "react-router-dom";
 
 function SearchProduct() {
   const { products } = useContext(AppContext);
-  // const [searchProduct, setSerProduct] = useState([]);
+  const [searchProduct, setSerProduct] = useState([]);
   const {term} = useParams()
 
+  useEffect(() => {
+    setSerProduct(
+      products.filter(
+        (data) => data?.title?.toLowerCase().includes(term.toLowerCase())
+      )
+    );
 
-  const searchResults = useMemo(() => {
-    return products?.filter((product) =>
-      product?.title?.toLowerCase().includes(term.toLowerCase())
-    ) || [];
   }, [term, products]);
 
 
@@ -22,8 +24,8 @@ function SearchProduct() {
       <div className="container text-center my-10px">
       <h2 className="mb-4">Search Results for "{term}"</h2>
         <div className="row d-flex justify-content-center align-items-center">
-        {searchResults.length > 0 ? (
-          searchResults.map((product) => (
+        {searchProduct.length > 0 ? (
+          searchProduct.map((product) => (
             <div key={product?._id} className="col-md-4 my-3">
               <div className="card bg-dark text-light text-center">
                 <Link to={`/product/${product?._id}`} className="p-3">
