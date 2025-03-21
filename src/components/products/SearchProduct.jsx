@@ -22,7 +22,7 @@ function SearchProduct() {
   return (
     <>
       <div className="container text-center my-10px">
-      <h2 className="mb-4">Search Results for "{term}"</h2>
+      <h2 className="mb-4 my-5px">Search Results for "{term}"</h2>
         <div className="row d-flex justify-content-center align-items-center">
         {searchProduct.length > 0 ? (
           searchProduct.map((product) => (
@@ -38,7 +38,6 @@ function SearchProduct() {
                       height: "200px",
                       borderRadius: "10px",
                       border: "2px solid yellow",
-                      objectFit: "cover",
                     }}
                   />
                 </Link>
@@ -54,6 +53,8 @@ function SearchProduct() {
               </div>
             </div>
           ))
+
+
         ) : (
           <h4 className="text-muted">No products found</h4>
         )}
