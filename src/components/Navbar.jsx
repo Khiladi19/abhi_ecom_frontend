@@ -13,8 +13,10 @@ function Navbar() {
   // search product
   const submitHandler = (e) => {
     e.preventDefault();
-    navigate(`/product/search/${searchTerm}`);
-    setSearchTerm(" ");
+    if (searchTerm.trim()) {
+      navigate(`/product/search/${searchTerm}`);
+      setSearchTerm("");
+    }
   };
   // filter productBy catagory
   const filterByCatagorey = (cat) => {
