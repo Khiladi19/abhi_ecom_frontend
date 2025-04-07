@@ -13,6 +13,7 @@ import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify";
+import AllOrder from './components/Allorder'
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/allorder" element={<AllOrder/>}/>
       <Route path="/shipping" element={<Address/>}/>
       <Route path="/checkout" element={<Checkout/>}/>
       <Route path="/order-conformation" element={<OrderConfirmation/>}/>
