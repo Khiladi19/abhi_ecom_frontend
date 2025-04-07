@@ -1,123 +1,159 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import AppContext from "../context/AppContext";
-
+import { useContext } from "react";
 function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
-  const {
-    setFilterData,
-    products,
-    logout,
-    isAuthenticated,
-    cart,
-  } = useContext(AppContext);
+  const { setFilterData, products, logout, isAuthenticated, cart } =
+    useContext(AppContext);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleSearch = (e) => {
+  let location = useLocation();
+  // navigate
+  let navigate = useNavigate();
+  // search product
+  const submitHandler = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/product/search/${searchTerm}`);
       setSearchTerm("");
     }
   };
-
-  const filterByCategory = (category) => {
+  // filter productBy catagory
+  const filterByCatagorey = (cat) => {
     setFilterData(
       products.filter(
-        (product) => product.catagory.toLowerCase() === category.toLowerCase()
+        (data) => data.catagory.toLowerCase() == cat.toLowerCase()
       )
     );
   };
-
+  // filter By Price
   const filterByPrice = (price) => {
-    setFilterData(products.filter((product) => product.price >= price));
+    setFilterData(products.filter((data) => data.price >= price));
   };
 
-  const categories = ["Mobiles", "Laptops", "Shirt", "Headphone"];
-  const prices = [15999, 25999, 40999, 50999, 11999];
-
   return (
-    <div className="nav sticky-top">
-      <div className="nav_bar d-flex justify-content-between align-items-center px-3 py-2 bg-dark text-white">
-        <Link to="/" className="left text-decoration-none text-white">
-          <h3>abhi_ecom</h3>
-        </Link>
+    <>
+      <div className="nav sticky-top">
+        <div className="nav_bar">
+          <Link
+            to={"/"}
+            className="left"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <h3>abhi_ecom</h3>
+          </Link>
+          <form className="search_bar" onSubmit={submitHandler}>
+            <span
+              className="material-symbols-outlined "
+              style={{ marginTop: "4px" }}
+            >
+              search
+            </span>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="seach product"
+            />
+          </form>
+          <div className="right">
+            {isAuthenticated && (
+              <>
+                {/* shoping cart */}
 
-        <form className="search_bar d-flex align-items-center" onSubmit={handleSearch}>
-          <span className="material-symbols-outlined me-1">search</span>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search product"
-            className="form-control"
-          />
-        </form>
-
-        <div className="right d-flex align-items-center">
-          {isAuthenticated ? (
-            <>
-              <Link to="/cart" className="btn btn-warning position-relative mx-2">
-                <span className="material-symbols-outlined">shopping_cart</span>
-                {cart?.items?.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cart.items.length}
-                    <span className="visually-hidden">unread messages</span>
+                <Link
+                  to={`/cart`}
+                  className="btn btn-warning position-relative mx-3"
+                >
+                  <span className="material-symbols-outlined">
+                    shopping_cart
                   </span>
-                )}
-              </Link>
 
-              <Link to="/profile" className="btn btn-warning mx-2">Profile</Link>
-              <Link to="/order-conformation" className="btn btn-warning mx-2">Orders</Link>
-              <button
-                className="btn btn-warning mx-2"
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/register" className="btn btn-info mx-2">Register</Link>
-              <Link to="/login" className="btn btn-warning mx-2">Login</Link>
-            </>
-          )}
-        </div>
-      </div>
+                  {cart?.items?.length > 0 && (
+                    <>
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {cart?.items?.length}
+                        <span className="visually-hidden">unread messages</span>
+                      </span>
+                    </>
+                  )}
+                </Link>
+                {/* profile */}
+                <Link to={`/profile`} className="btn btn-warning mx-3">
+                  profile
+                </Link>
+                <Link to={`/order-conformation`} className="btn btn-warning mx-3">
+                  Order
+                </Link>
 
-      {location.pathname === "/" && (
-        <div className="sub_bar d-flex flex-wrap justify-content-center bg-light py-2">
-          <div className="items mx-2 cursor-pointer" onClick={() => setFilterData(products)}>
-            No Filter
+                {/* logout */}
+                <button
+                  className="btn btn-warning mx-3"
+                  onClick={() => {
+                    logout();
+                    navigate(`/`);
+                  }}
+                >
+                  logout
+                </button>
+              </>
+            )}
+
+            {!isAuthenticated && (
+              <>
+                <Link to={`/register`} className="btn btn-info mx-3">
+                  register
+                </Link>
+                <Link to={`/login`} className="btn btn-warning mx-3">
+                  login
+                </Link>
+              </>
+            )}
           </div>
-          {categories.map((cat) => (
-            <div
-              key={cat}
-              className="items mx-2 cursor-pointer"
-              onClick={() => filterByCategory(cat)}
-            >
-              {cat}
-            </div>
-          ))}
-          {prices.map((price) => (
-            <div
-              key={price}
-              className="items mx-2 cursor-pointer"
-              onClick={() => filterByPrice(price)}
-            >
-              {price}
-            </div>
-          ))}
         </div>
-      )}
-    </div>
+
+
+        
+        {location.pathname == "/" && (
+          <div className="sub_bar ">
+            <div className="items" onClick={() => setFilterData(products)}>
+              No Filter
+            </div>
+            <div className="items" onClick={() => filterByCatagorey("mobiles")}>
+              Mobiles
+            </div>
+            <div className="items" onClick={() => filterByCatagorey("laptops")}>
+              Laptops
+            </div>
+            <div className="items" onClick={() => filterByCatagorey("shirt")}>
+              Men's
+            </div>
+            <div
+              className="items"
+              onClick={() => filterByCatagorey("headphone")}
+            >
+              Headhphones
+            </div>
+            <div className="items" onClick={() => filterByPrice(15999)}>
+              15999
+            </div>
+            <div className="items" onClick={() => filterByPrice(25999)}>
+              25999
+            </div>
+            <div className="items" onClick={() => filterByPrice(40999)}>
+              49999
+            </div>
+            <div className="items" onClick={() => filterByPrice(50999)}>
+              25999
+            </div>
+            <div className="items" onClick={() => filterByPrice(11999)}>
+              35999
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
 export default Navbar;
-
