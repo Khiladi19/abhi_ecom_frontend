@@ -39,25 +39,33 @@ An e-commerce web application built using the MERN stack, with features like use
 👉 [Click here to view live demo](https://abhi-ecom-frontend-4pey.vercel.app/)
 
 ---
-
 ## 📸 Screenshots
 
-> - Home Page
-![alt text](home.png)
-> - Login
-![alt text](login.png)
+> - Home Page  
+![Home Page](screenshots/home.png)
+
+> - Login  
+![Login](screenshots/login.png)
+
 > - Product Detail Page  
-![alt text](related.png)
+![Product Detail](screenshots/related.png)
+
 > - Cart  
-![alt text](cart.png)
+![Cart](screenshots/cart.png)
+
 > - Checkout  
-![alt text](address.png)
-> - OrderSummary
-![alt text](order-1.png)
-> - Payment Success Page
-![alt text](payment.png)
-> - OrderDetails
-![alt text](orderdetails.png)
+![Checkout](screenshots/address.png)
+
+> - Order Summary  
+![Order Summary](screenshots/order.png)
+
+> - Payment Success Page  
+![Payment Success](screenshots/payment.png)
+
+> - Order Details  
+![Order Details](screenshots/orderdetails.png)
+
+---
 
 
 
