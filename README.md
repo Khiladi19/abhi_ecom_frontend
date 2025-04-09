@@ -28,7 +28,7 @@ An e-commerce web application built using the MERN stack, with features like use
 
 ✅ User Registration and Login  
 ✅ Add to Cart (increase or decrease the qty)
-✅ Product Search  
+✅ Product Search 
 ✅ Checkout and Place Order  
 ✅ Razorpay Payment Integration  
 
@@ -78,8 +78,7 @@ cd client
 npm install
 npm run dev
 
-### backend
-
+### backend (another reprositry name (abhi_ecom))
 ```bash
 cd backend
 npm install (you need to install some package eg:-express.js,jwt,cors or other)
