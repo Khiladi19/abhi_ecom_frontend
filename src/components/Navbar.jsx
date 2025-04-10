@@ -40,7 +40,7 @@ function Navbar() {
             className="left"
             style={{ textDecoration: "none", color: "white" }}
           >
-            <h3>abhi_ecom</h3>
+            <h3>abhi</h3>
           </Link>
           <form className="search_bar" onSubmit={submitHandler}>
             <span
