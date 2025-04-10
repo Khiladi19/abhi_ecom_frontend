@@ -75,8 +75,8 @@ function AppState(props) {
       console.log("User Register ", api);
       // alert(api.data.message)
       toast.success(api.data.message, {
-        position: "top-left",
-        autoClose: 5000,
+        position: "top-right",
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
