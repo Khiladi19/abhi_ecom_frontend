@@ -9,9 +9,6 @@ body::-webkit-scrollbar{
   display: none;
 }
 
-.nav{
-  /* width: fit-content; */
-}
 .nav_bar{
   display: flex;
   align-items: center;

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Cart() {
   const { cart, decreaseQty, removeCart, addToCart, clearCart } =
     useContext(AppContext);
-  console.log("cart", cart.items);
+
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
   useEffect(() => {
@@ -22,16 +22,21 @@ function Cart() {
   }, [cart]);
   return (
     <>
-    {/* continue shoping */}
-      {cart?.items?.length == 0 && (
-        <>
-          <div className="container my-5 text-center">
-            <Link to={`/`} className=" btn btn-primary" style={{fontWeight:"bold"}}>
-              Continue Shoping--
-            </Link>
-          </div>
-        </>
+      {/* continue shoping */}
+      {(!cart || !cart.items || cart.items.length === 0) && (
+        <div className="container my-5 text-center">
+          <h2>Your cart is empty 🛒</h2>
+          <p>Looks like you haven't added anything yet.</p>
+          <Link
+            to={`/`}
+            className="btn btn-primary"
+            style={{ fontWeight: "bold" }}
+          >
+            Continue Shopping
+          </Link>
+        </div>
       )}
+
       {/* total qty or price show */}
       {cart?.items?.length > 0 && (
         <>
